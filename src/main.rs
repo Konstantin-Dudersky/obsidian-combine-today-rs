@@ -1,18 +1,14 @@
-use std::fs;
-
-use obsidian_combine_today_rs::bootstrap;
-
-const VAULT_PATH: &str = "/home/konstantin/documents/.obsidian/obsidian/";
-const FOLDER_CALENDAR: &str = "calendar";
-const NOTE_NAME_FORMAT: &str = "%Y-%m-%d.md";
-
-const TARGET_FILE: &str = "/home/konstantin/desktop/today_tasks.md";
-
-const NOTE: &str = "/home/konstantin/documents/.obsidian/obsidian/_calendar/2023-07-30.md";
+use obsidian_combine_today_rs::*;
 
 fn main() {
-    bootstrap();
-    // let file = fs::read(NOTE).unwrap();
+    let args = Args::new().unwrap();
 
-    // let content = String::from_utf8_lossy(&file);
+    let note_reader = NoteReader::new();
+    let get_timestamp = GetTimestamp::new();
+    let file_writer = FileWriter::new(&args.target_file);
+
+    let runner =
+        Runner::new(note_reader, get_timestamp, file_writer, &args.folders);
+
+    runner.run().unwrap();
 }

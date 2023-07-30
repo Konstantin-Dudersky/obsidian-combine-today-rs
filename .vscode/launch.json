@@ -1,0 +1,67 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "Debug unit tests in library 'obsidian-combine-today-rs'",
+      "cargo": {
+        "args": [
+          "test",
+          "--no-run",
+          "--lib",
+          "--package=obsidian-combine-today-rs"
+        ],
+        "filter": {
+          "name": "obsidian-combine-today-rs",
+          "kind": "lib"
+        }
+      },
+      "args": [],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "Debug executable 'obsidian-combine-today-rs'",
+      "cargo": {
+        "args": [
+          "build",
+          "--bin=obsidian-combine-today-rs",
+          "--package=obsidian-combine-today-rs"
+        ],
+        "filter": {
+          "name": "obsidian-combine-today-rs",
+          "kind": "bin"
+        }
+      },
+      "args": [
+        "/home/konstantin/desktop/today_tasks.md",
+        "/home/konstantin/documents/.obsidian/_calendar"
+      ],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "Debug unit tests in executable 'obsidian-combine-today-rs'",
+      "cargo": {
+        "args": [
+          "test",
+          "--no-run",
+          "--bin=obsidian-combine-today-rs",
+          "--package=obsidian-combine-today-rs"
+        ],
+        "filter": {
+          "name": "obsidian-combine-today-rs",
+          "kind": "bin"
+        }
+      },
+      "args": [],
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}

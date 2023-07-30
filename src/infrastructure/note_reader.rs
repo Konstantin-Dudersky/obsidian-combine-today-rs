@@ -13,7 +13,7 @@ impl NoteReader {
 
 impl application::INoteReader for NoteReader {
     fn read(&self, note: &Note) -> Result<Note, Errors> {
-        check_folder(note.vault_path.as_path())?;
+        check_folder(note.path_to_daily_notes.as_path())?;
         let content = read_note_content(note.full_path().as_path())?;
         let content = String::from_utf8_lossy(&content);
         let new_note = Note {
@@ -36,11 +36,11 @@ fn check_folder(path: &path::Path) -> Result<(), Errors> {
 
 /// Читаем содержимое заметки
 fn read_note_content(path: &path::Path) -> Result<Vec<u8>, Errors> {
-    match fs::read(&path) {
+    match fs::read(path) {
         Ok(value) => Ok(value),
         Err(_) => {
             let msg = path.to_str().unwrap_or_default().to_string();
-            return Err(Errors::NoteNotExist(msg));
+            Err(Errors::NoteNotExist(msg))
         }
     }
 }
